@@ -99,20 +99,20 @@
 <div class="card">
   <span class="badge">SHANE ENGLISH 4 EVERYONE</span>
   <h2>🎁 Free YLE Worksheets & Slides</h2>
-  <p>Worksheet PDF နှင့် PowerPoint Slide များကို အခမဲ့ Download ရယူရန် အောက်ပါ <b>တစ်ခုခု</b> ကို Subscribe / Follow အရင်လုပ်ပေးပါ။</p>
+  <p>Worksheet PDF နှင့် PowerPoint Slide များကို အခမဲ့ Download ရယူရန် အောက်ပါ ၃ ခုထဲမှ <b>ကြိုက်နှစ်သက်ရာ ၂ ခု</b> ကို Subscribe / Follow အရင်လုပ်ပေးပါ။</p>
 
   <!-- 1. YouTube Link -->
-  <a id="ytBtn" href="https://www.youtube.com/@ShaneEnglish4Everyone?sub_confirmation=1" target="_blank" class="btn btn-yt" onclick="unlockWithPlatform('ytBtn', 'YouTube')">
+  <a id="ytBtn" href="https://www.youtube.com/@ShaneEnglish4Everyone?sub_confirmation=1" target="_blank" class="btn btn-yt" onclick="trackStep('yt', 'ytBtn', 'YouTube')">
     <span>▶️</span> Subscribe on YouTube
   </a>
 
   <!-- 2. Facebook Page Link -->
-  <a id="fbBtn" href="https://www.facebook.com/share/18tXD6HzWp/" target="_blank" class="btn btn-fb" onclick="unlockWithPlatform('fbBtn', 'Facebook')">
+  <a id="fbBtn" href="https://www.facebook.com/share/18tXD6HzWp/" target="_blank" class="btn btn-fb" onclick="trackStep('fb', 'fbBtn', 'Facebook')">
     <span>📘</span> Follow on Facebook
   </a>
 
   <!-- 3. TikTok Link -->
-  <a id="ttBtn" href="https://www.tiktok.com/@shanehtet262" target="_blank" class="btn btn-tt" onclick="unlockWithPlatform('ttBtn', 'TikTok')">
+  <a id="ttBtn" href="https://www.tiktok.com/@shanehtet262" target="_blank" class="btn btn-tt" onclick="trackStep('tt', 'ttBtn', 'TikTok')">
     <span>🎵</span> Follow on TikTok
   </a>
 
@@ -120,28 +120,38 @@
 
   <!-- 4. Google Drive Download Link -->
   <a id="unlockBtn" href="https://drive.google.com/drive/folders/1Sphg42CCzmyWN2-56PXmA7guClcMky7S" target="_blank" class="btn btn-unlock">
-    🔒 Locked (Subscribe 1 to Unlock)
+    🔒 Locked (0/2 Completed)
   </a>
 </div>
 
 <script>
-  let isUnlocked = false;
+  const completedPlatforms = new Set();
+  const pendingPlatforms = new Set();
 
-  function unlockWithPlatform(buttonId, platformName) {
+  function trackStep(key, buttonId, platformName) {
+    if (completedPlatforms.has(key) || pendingPlatforms.has(key)) return;
+
+    pendingPlatforms.add(key);
     const clickedBtn = document.getElementById(buttonId);
     const unlockBtn = document.getElementById('unlockBtn');
-
-    if (isUnlocked) return;
 
     clickedBtn.innerHTML = `⏳ Checking ${platformName}...`;
 
     setTimeout(() => {
+      pendingPlatforms.delete(key);
+      completedPlatforms.add(key);
+
       clickedBtn.innerHTML = `✅ ${platformName} Subscribed!`;
       clickedBtn.classList.add('btn-done');
 
-      unlockBtn.classList.add('active');
-      unlockBtn.innerHTML = `🔓 Download Worksheet & Slides Now`;
-      isUnlocked = true;
+      const count = completedPlatforms.size;
+
+      if (count === 1) {
+        unlockBtn.innerHTML = `🔒 Locked (1/2 Completed - 1 more to go)`;
+      } else if (count >= 2) {
+        unlockBtn.classList.add('active');
+        unlockBtn.innerHTML = `🔓 Download Worksheet & Slides Now`;
+      }
     }, 5000);
   }
 </script>

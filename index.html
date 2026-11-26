@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shane English 4 Everyone - Free Study Materials</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 15px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 32px 24px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+    }
+    .badge {
+      background: #e0f2fe;
+      color: #0284c7;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    h2 {
+      color: #1e293b;
+      margin: 0 0 10px 0;
+      font-size: 22px;
+    }
+    p {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-sizing: border-box;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    /* Platform Colors */
+    .btn-yt { background: #ff0000; color: #ffffff; }
+    .btn-fb { background: #1877f2; color: #ffffff; }
+    .btn-tt { background: #111111; color: #ffffff; }
+    
+    .btn-done {
+      background: #10b981 !important;
+      color: #ffffff !important;
+    }
+    .divider {
+      margin: 22px 0 18px 0;
+      border-top: 1px dashed #cbd5e1;
+    }
+    .btn-unlock {
+      background: #e2e8f0;
+      color: #64748b;
+      pointer-events: none;
+      font-size: 16px;
+      padding: 16px;
+    }
+    .btn-unlock.active {
+      background: #16a34a;
+      color: #ffffff;
+      pointer-events: auto;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <span class="badge">SHANE ENGLISH 4 EVERYONE</span>
+  <h2>🎁 Free YLE Worksheets & Slides</h2>
+  <p>Worksheet PDF နှင့် PowerPoint Slide များကို အခမဲ့ Download ရယူရန် အောက်ပါ <b>တစ်ခုခု</b> ကို Subscribe / Follow အရင်လုပ်ပေးပါ။</p>
+
+  <!-- 1. YouTube Link -->
+  <a id="ytBtn" href="https://www.youtube.com/@ShaneEnglish4Everyone?sub_confirmation=1" target="_blank" class="btn btn-yt" onclick="unlockWithPlatform('ytBtn', 'YouTube')">
+    <span>▶️</span> Subscribe on YouTube
+  </a>
+
+  <!-- 2. Facebook Page Link -->
+  <a id="fbBtn" href="https://www.facebook.com/share/18tXD6HzWp/" target="_blank" class="btn btn-fb" onclick="unlockWithPlatform('fbBtn', 'Facebook')">
+    <span>📘</span> Follow on Facebook
+  </a>
+
+  <!-- 3. TikTok Link -->
+  <a id="ttBtn" href="https://www.tiktok.com/@shanehtet262" target="_blank" class="btn btn-tt" onclick="unlockWithPlatform('ttBtn', 'TikTok')">
+    <span>🎵</span> Follow on TikTok
+  </a>
+
+  <div class="divider"></div>
+
+  <!-- 4. Google Drive Download Link -->
+  <a id="unlockBtn" href="https://drive.google.com/drive/folders/1Sphg42CCzmyWN2-56PXmA7guClcMky7S" target="_blank" class="btn btn-unlock">
+    🔒 Locked (Subscribe 1 to Unlock)
+  </a>
+</div>
+
+<script>
+  let isUnlocked = false;
+
+  function unlockWithPlatform(buttonId, platformName) {
+    const clickedBtn = document.getElementById(buttonId);
+    const unlockBtn = document.getElementById('unlockBtn');
+
+    if (isUnlocked) return;
+
+    clickedBtn.innerHTML = `⏳ Checking ${platformName}...`;
+
+    setTimeout(() => {
+      clickedBtn.innerHTML = `✅ ${platformName} Subscribed!`;
+      clickedBtn.classList.add('btn-done');
+
+      unlockBtn.classList.add('active');
+      unlockBtn.innerHTML = `🔓 Download Worksheet & Slides Now`;
+      isUnlocked = true;
+    }, 5000);
+  }
+</script>
+
+</body>
+</html>
